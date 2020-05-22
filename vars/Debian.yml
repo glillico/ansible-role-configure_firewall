@@ -1,0 +1,4 @@
+---
+# Debian vars file for ansible-role-firewall
+
+__firewall_package: ufw

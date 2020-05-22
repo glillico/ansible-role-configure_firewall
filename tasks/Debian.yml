@@ -1,0 +1,33 @@
+---
+# Debian tasks file for ansible-role-firewall
+
+- name: Reset the ufw firewall.
+  ufw:
+    state: reset
+
+- name: Apply firewall rules.
+  ufw:
+    rule: '{{ item.firewall_ufw_rule }}'
+    proto: '{{ item.firewall_ufw_proto }}'
+    direction: '{{ item.firewall_ufw_direction }}'
+    interface: '{{ item.firewall_ufw_interface | default(omit) }}'
+    from_ip: '{{ item.firewall_ufw_from_ip}}'
+    from_port: '{{ item.firewall_ufw_from_port | default(omit) }}'
+    to_ip: '{{ item.firewall_ufw_to_ip | default("any", true) }}'
+    to_port: '{{ item.firewall_ufw_to_port | default(omit) }}'
+    comment: '{{ item.firewall_ufw_comment | default(omit) }}'
+  with_items: '{{ firewall_ufw }}'
+
+- name: Set default incoming to deny.
+  ufw:
+    policy: deny
+    direction: incoming
+
+- name: Set default outgoing to allow.
+  ufw:
+    policy: allow
+    direction: outgoing
+
+- name:  Ensure ufw is enabled.
+  ufw:
+    state: enabled
