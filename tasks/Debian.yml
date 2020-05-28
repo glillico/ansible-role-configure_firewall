@@ -5,7 +5,7 @@
   ufw:
     state: reset
 
-- name: Apply firewall rules.
+- name: Apply ufw rules.
   ufw:
     rule: '{{ item.firewall_ufw_rule }}'
     proto: '{{ item.firewall_ufw_proto }}'

@@ -1,2 +1,18 @@
 ---
 # RedHat tasks file for ansible-role-firewall
+
+- name:  Ensure firewalld is running.
+  service:
+    name: '{{ firewall_package }}'
+    state: started
+
+- name: Apply firewalld rules.
+  firewalld:
+    state: '{{ item.firewall_firewalld_state }}'
+    zone: '{{ item.firewall_firewalld_zone }}'
+    port: '{{ item.firewall_firewalld_port | default(omit) }}'
+    service: '{{ item.firewall_firewalld_service | default(omit) }}'
+    immediate: true
+    permanent: true
+    offline: true
+  with_items: '{{ firewall_firewalld }}'
