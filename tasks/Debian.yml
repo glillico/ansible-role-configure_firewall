@@ -11,7 +11,7 @@
     proto: '{{ item.firewall_ufw_proto }}'
     direction: '{{ item.firewall_ufw_direction }}'
     interface: '{{ item.firewall_ufw_interface | default(omit) }}'
-    from_ip: '{{ item.firewall_ufw_from_ip}}'
+    from_ip: '{{ item.firewall_ufw_from_ip }}'
     from_port: '{{ item.firewall_ufw_from_port | default(omit) }}'
     to_ip: '{{ item.firewall_ufw_to_ip | default("any", true) }}'
     to_port: '{{ item.firewall_ufw_to_port | default(omit) }}'
