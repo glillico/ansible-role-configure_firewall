@@ -44,6 +44,39 @@ None.
 |---|---|
 |__firewall_package: ufw|The name of the firewall package on Debian based systems.<br>This value is used to define firewall_package_name in the tasks/main.yml file.<br>This value can be overridden by setting firewall_package_name in the playbook.|
 
+#### Examples
+##### UFW Firewall
+
+Limits the connections coming in on interfaec enp0s8 from 192.168.60.1 on TCP port 22.
+
+```
+  - firewall_ufw_rule: 'limit'
+    firewall_ufw_direction: 'in'
+    firewall_ufw_interface: 'enp0s8'
+    firewall_ufw_from_ip: '192.168.60.1'
+    firewall_ufw_from_port: ''
+    firewall_ufw_to_ip: ''
+    firewall_ufw_to_port: '22'
+    firewall_ufw_proto: 'tcp'
+    firewall_ufw_comment: ''
+```
+
+##### firewalld Firewall
+
+Enable the public zone to accept TCP connections on port 8080.
+```
+  - firewall_firewalld_state: 'enabled'
+    firewall_firewalld_port: '8080/tcp'
+    firewall_firewalld_zone: 'public'
+```
+
+Disables the cockpit service on the public zone.
+```
+  - firewall_firewalld_state: 'disabled'
+    firewall_firewalld_service: 'cockpit'
+    firewall_firewalld_zone: 'public'
+```
+
 ## Dependencies
 
 None.
