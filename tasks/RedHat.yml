@@ -1,6 +1,11 @@
 ---
 # RedHat tasks file for ansible-role-firewall
 
+- name: Ensure the firewall package is present.
+  package:
+    name: '{{ firewall_package }}'
+    state: present
+
 - name:  Ensure firewalld is running.
   service:
     name: '{{ firewall_package }}'

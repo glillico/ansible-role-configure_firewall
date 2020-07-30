@@ -1,6 +1,11 @@
 ---
 # Debian tasks file for ansible-role-firewall
 
+- name: Ensure the firewall package is present.
+  package:
+    name: '{{ firewall_package }}'
+    state: present
+
 - name: Apply ufw rules.
   ufw:
     rule: '{{ item.firewall_ufw_rule }}'
