@@ -2,22 +2,16 @@
 - name: Converge
   hosts: all
   become: true
-  vars:
-    firewall_ufw:
-      - firewall_ufw_rule: 'limit'
-        firewall_ufw_direction: 'in'
-        firewall_ufw_interface: 'enp0s8'
-        firewall_ufw_from_ip: '192.168.60.1'
-        firewall_ufw_from_port: ''
-        firewall_ufw_to_ip: ''
-        firewall_ufw_to_port: '22'
-        firewall_ufw_proto: 'tcp'
-        firewall_ufw_comment: ''
 
-    firewall_firewalld:
-      - firewall_firewalld_state: 'enabled'
-        firewall_firewalld_port: '22/tcp'
-        firewall_firewalld_zone: ''
+  pre_tasks:
+    - name: Include variables.
+      include_vars: 'vars/main.yml'
+
+    - name: Update apt cache.
+      package:
+        update_cache: true
+        cache_valid_time: 600
+      when: ansible_os_family == 'Debian'
 
   tasks:
     - name: "Include ansible-role-configure_firewall"
