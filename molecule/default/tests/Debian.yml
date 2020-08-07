@@ -1,0 +1,32 @@
+---
+# Debian verify file for configure_firewall
+
+    - name: Check the ufw package status.
+      package:
+        name: '{{ firewall_package }}'
+        state: present
+      check_mode: yes
+      register: pkg_status
+
+    - name: Test that the ufw package is installed.
+      assert:
+        that:
+          - not pkg_status.changed
+
+    - name: Check ufw rules have been created.
+      ufw:
+        rule: '{{ ver_item.firewall_ufw_rule }}'
+        proto: '{{ ver_item.firewall_ufw_proto }}'
+        direction: '{{ ver_item.firewall_ufw_direction }}'
+        interface: '{{ ver_item.firewall_ufw_interface | default(omit) }}'
+        from_ip: '{{ ver_item.firewall_ufw_from_ip }}'
+        from_port: '{{ ver_item.firewall_ufw_from_port | default(omit) }}'
+        to_ip: '{{ ver_item.firewall_ufw_to_ip | default("any", true) }}'
+        to_port: '{{ ver_item.firewall_ufw_to_port | default(omit) }}'
+        comment: '{{ ver_item.firewall_ufw_comment | default(omit) }}'
+      with_items: '{{ firewall_ufw }}'
+      check_mode: true
+      register: result
+      failed_when: result.changed
+      loop_control:
+        loop_var: ver_item

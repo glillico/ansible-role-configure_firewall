@@ -1,0 +1,30 @@
+---
+# RedHat verify file for configure_firewall
+
+    - name: Check the firewalld package status.
+      package:
+        name: '{{ firewall_package }}'
+        state: present
+      check_mode: yes
+      register: pkg_status
+
+    - name: Test that the firewalld package is installed.
+      assert:
+        that:
+          - not pkg_status.changed
+
+    - name: Check firewalld rules have been created.
+      firewalld:
+        state: '{{ ver_item.firewall_firewalld_state }}'
+        zone: '{{ ver_item.firewall_firewalld_zone }}'
+        port: '{{ ver_item.firewall_firewalld_port | default(omit) }}'
+        service: '{{ ver_item.firewall_firewalld_service | default(omit) }}'
+        immediate: true
+        permanent: true
+        offline: true
+      with_items: '{{ firewall_firewalld }}'
+      check_mode: true
+      register: result
+      failed_when: result.changed
+      loop_control:
+        loop_var: ver_item

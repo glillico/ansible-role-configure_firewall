@@ -1,18 +1,18 @@
 ---
-# vars file for ansible-role-firewall
+# vars file for configure_firewall
 
 firewall_ufw:
   - firewall_ufw_rule: 'limit'
     firewall_ufw_direction: 'in'
     firewall_ufw_interface: 'eth0'
-    firewall_ufw_from_ip: '192.168.60.1'
+    firewall_ufw_from_ip: ''
     firewall_ufw_from_port: ''
     firewall_ufw_to_ip: ''
-    firewall_ufw_to_port: '22'
+    firewall_ufw_to_port: '12345'
     firewall_ufw_proto: 'tcp'
     firewall_ufw_comment: ''
 
 firewall_firewalld:
   - firewall_firewalld_state: 'enabled'
-    firewall_firewalld_port: '22/tcp'
+    firewall_firewalld_port: '12345/tcp'
     firewall_firewalld_zone: ''
