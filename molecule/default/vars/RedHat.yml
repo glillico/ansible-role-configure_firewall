@@ -1,0 +1,4 @@
+---
+# RedHat vars file for ansible-role-firewall
+
+firewall_package: firewalld

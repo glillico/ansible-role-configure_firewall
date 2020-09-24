@@ -1,9 +1,13 @@
 ---
 # Debian tasks file for ansible-role-firewall
 
-- name: Reset the ufw firewall.
-  ufw:
-    state: reset
+- name: Ensure the firewall package and its dependencies are present.
+  package:
+    name:
+      - '{{ firewall_package }}'
+      - '{{ item }}'
+    state: present
+  with_items: "{{ cfwl_pkgs }}"
 
 - name: Apply ufw rules.
   ufw:

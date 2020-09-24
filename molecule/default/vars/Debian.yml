@@ -1,0 +1,4 @@
+---
+# Debian vars file for configure_firewall
+
+firewall_package: ufw

@@ -14,11 +14,6 @@
     firewall_package: '{{ __firewall_package }}'
     when: firewall_package is not defined
 
-- name: Ensure the firewall package is present.
-  package:
-    name: '{{ firewall_package }}'
-    state: present
-
 - name: Include OS-specific tasks.
   include_tasks: '{{ var_item }}'
   with_first_found:
@@ -29,7 +24,7 @@
   loop_control:
     loop_var: var_item
 
-- name:  Ensure firewall is enabled.
+- name: Ensure firewall service is running and enabled to start on boot.
   service:
     name: '{{ firewall_package }}'
     state: started

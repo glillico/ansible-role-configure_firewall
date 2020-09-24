@@ -1,6 +1,9 @@
 ---
 # defaults file for ansible-role-firewall
 
+cfwl_pkgs:
+  - procps
+
 firewall_ufw:
   - firewall_ufw_rule: ''
     firewall_ufw_direction: ''
