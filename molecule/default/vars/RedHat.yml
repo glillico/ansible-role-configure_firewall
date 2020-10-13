@@ -2,3 +2,8 @@
 # RedHat vars file for ansible-role-firewall
 
 firewall_package: firewalld
+
+firewall_firewalld:
+  - firewall_firewalld_state: 'enabled'
+    firewall_firewalld_port: '12345/tcp'
+    firewall_firewalld_zone: ''

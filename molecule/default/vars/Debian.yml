@@ -2,3 +2,14 @@
 # Debian vars file for configure_firewall
 
 firewall_package: ufw
+
+firewall_ufw:
+  - firewall_ufw_rule: 'limit'
+    firewall_ufw_direction: 'in'
+    firewall_ufw_interface: ''
+    firewall_ufw_from_ip: ''
+    firewall_ufw_from_port: ''
+    firewall_ufw_to_ip: ''
+    firewall_ufw_to_port: '12345'
+    firewall_ufw_proto: 'tcp'
+    firewall_ufw_comment: ''

@@ -5,9 +5,6 @@
   hosts: all
 
   pre_tasks:
-    - name: Include variables.
-      include_vars: 'vars/main.yml'
-
     - name: Include OS-specific variables.
       include_vars: "{{ item }}"
       with_first_found:
