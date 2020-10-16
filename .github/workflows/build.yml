@@ -33,7 +33,7 @@ jobs:
           python-version: '3.x'
 
       - name: Install package dependencies.
-        run: pip3 install docker ansible-lint yamllint molecule
+        run: pip3 install docker ansible-lint yamllint molecule[docker]
 
       - name: Ensure the ip6_tables kernel module is loaded.
         run: sudo insmod /lib/modules/`uname -r`/kernel/net/ipv6/netfilter/ip6_tables.ko
