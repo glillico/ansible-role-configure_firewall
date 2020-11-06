@@ -1,6 +1,6 @@
 # Ansible Role : configure_firewall
 
-[![molecule](https://github.com/glillico/ansible-role-configure_firewall/workflows/molecule/badge.svg)](https://github.com/glillico/ansible-role-configure_firewall/actions?query=workflow%3Amolecule)
+[![CI](https://github.com/glillico/ansible-role-configure_firewall/workflows/CI/badge.svg)](https://github.com/glillico/ansible-role-configure_firewall/actions?query=workflow%3ACI)
 
 Installs and configures either ufw or firewalld depending on if the systems is based on Debian or RedHat.
 
