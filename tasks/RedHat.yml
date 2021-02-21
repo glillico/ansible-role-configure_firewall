@@ -12,7 +12,7 @@
     state: started
 
 - name: Apply firewalld rules.
-  firewalld:
+  ansible.posix.firewalld:
     state: '{{ item.firewall_firewalld_state }}'
     zone: '{{ item.firewall_firewalld_zone }}'
     port: '{{ item.firewall_firewalld_port | default(omit) }}'
