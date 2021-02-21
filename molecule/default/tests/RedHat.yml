@@ -14,7 +14,7 @@
           - not pkg_status.changed
 
     - name: Check firewalld rules have been created.
-      firewalld:
+      ansible.posix.firewalld:
         state: '{{ ver_item.firewall_firewalld_state }}'
         zone: '{{ ver_item.firewall_firewalld_zone }}'
         port: '{{ ver_item.firewall_firewalld_port | default(omit) }}'
