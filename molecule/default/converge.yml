@@ -18,7 +18,5 @@
         cache_valid_time: 600
       when: ansible_os_family == 'Debian'
 
-  tasks:
-    - name: "Include ansible-role-configure_firewall"
-      include_role:
-        name: "ansible-role-configure_firewall"
+  roles:
+    - role: glillico.configure_firewall
