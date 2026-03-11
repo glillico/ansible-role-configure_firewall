@@ -8,16 +8,15 @@
     - name: Include OS-specific variables.
       include_vars: "{{ item }}"
       with_first_found:
-        - 'vars/{{ ansible_distribution }}-{{ ansible_distribution_major_version }}.yml'
-        - 'vars/{{ ansible_distribution }}.yml'
-        - 'vars/{{ ansible_os_family }}-{{ ansible_distribution_major_version }}.yml'
-        - 'vars/{{ ansible_os_family }}.yml'
-
+        - "vars/{{ ansible_facts['distribution'] }}-{{ ansible_facts['distribution_major_version'] }}.yml"
+        - "vars/{{ ansible_facts['distribution'] }}.yml"
+        - "vars/{{ ansible_facts['os_family'] }}-{{ ansible_facts['distribution_major_version'] }}.yml"
+        - "vars/{{ ansible_facts['os_family'] }}.yml"
   tasks:
     - name: Include OS-specific tasks.
       include_tasks: "{{ item }}"
       with_first_found:
-        - 'tests/{{ ansible_distribution }}-{{ ansible_distribution_major_version }}.yml'
-        - 'tests/{{ ansible_distribution }}.yml'
-        - 'tests/{{ ansible_os_family }}-{{ ansible_distribution_major_version }}.yml'
-        - 'tests/{{ ansible_os_family }}.yml'
+        - "tests/{{ ansible_facts['distribution'] }}-{{ ansible_facts['distribution_major_version'] }}.yml"
+        - "tests/{{ ansible_facts['distribution'] }}.yml"
+        - "tests/{{ ansible_facts['os_family'] }}-{{ ansible_facts['distribution_major_version'] }}.yml"
+        - "tests/{{ ansible_facts['os_family'] }}.yml"
